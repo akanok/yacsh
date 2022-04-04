@@ -81,8 +81,6 @@ void Command_free(Command *cmd){
 	cmd->args = NULL;
 	cmd->argsNum = 0;
 	cmd->allocatedArgs = 0;
-
-
 }
 
 

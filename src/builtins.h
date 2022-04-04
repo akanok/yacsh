@@ -5,7 +5,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <limits.h>
-#include "../src/yacsh.h"
+#include "./yacsh.h"
 
 
 static char lastdir[PATH_MAX];

@@ -4,7 +4,7 @@
 #include <libgen.h>
 #include <limits.h>
 #include <string.h>
-#include "../bin/y.tab.h"
+#include "./parser/y.tab.h"
 
 
 

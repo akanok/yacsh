@@ -1,8 +1,8 @@
 %{
     #include <stdio.h>
     #include <stdlib.h>
-    #include "../src/yacsh.h"
-    #include "../src/builtins.h"
+    #include "../yacsh.h"
+    #include "../builtins.h"
 
     void yyerror (char *s);
     int yylex();

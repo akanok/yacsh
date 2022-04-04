@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 cd ./bin/
 rm lex.yy.c yacsh y.tab.c y.tab.h
 yacc -d ../src/yacsh.y 
