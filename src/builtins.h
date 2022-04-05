@@ -10,6 +10,8 @@
 
 static char lastdir[PATH_MAX];
 
+extern char **environ;
+
 int cd(Command *cmd){
     char curdir[PATH_MAX];
     getcwd(curdir, sizeof(curdir));
@@ -51,8 +53,12 @@ int cd(Command *cmd){
 
 
 
-void envar(Command *cmd){
-	printf("ENVAR: %s\n", cmd->args[0]);
+void set(Command *cmd){
+	char **s = environ;
+
+    for (; *s; s++) {
+      printf("%s\n", *s);
+    }
 }
 
 
@@ -67,8 +73,11 @@ int Command_builtins(Command *cmd){
 	} else if ( !strncmp(command, "cd", 3) ){
 		cd(cmd);
 		return 1;
-	} else if ( !strncmp(command, "envar", 6) ){
-		envar(cmd);
+	} else if ( !strncmp(command, "set", 4) ){
+		set(cmd);
+		return 1;
+	} else if ( !strncmp(command, "unset", 6) ){
+		//unset(cmd); //putenv()
 		return 1;
 	}
 
