@@ -52,7 +52,6 @@ int cd(Command *cmd){
 }
 
 
-
 void set(Command *cmd){
 	char **s = environ;
 
@@ -60,7 +59,6 @@ void set(Command *cmd){
       printf("%s\n", *s);
     }
 }
-
 
 
 

@@ -22,11 +22,11 @@ void execute(char *args[]){
 	 
 	if (pid < 0) {
 		fprintf(stderr, "Fork Failed");
-		exit(-1);
+		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0) {
 		execvp(args[0],args);
-		perror("Command not found\nexecvp");
+		perror("yacsh: Command not found: ");
 	}
 	else {
 		int returnStatus;
