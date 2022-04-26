@@ -9,7 +9,7 @@ run:
 	
 
 yacsh: yacc lex ./src/yacsh.c check_bin_folder
-	cc ./src/yacsh.c ./src/parser/y.tab.c ./src/parser/lex.yy.c -o ./bin/yacsh
+	cc ./src/yacsh.c ./src/parser/y.tab.c ./src/parser/lex.yy.c -o ./bin/yacsh -lreadline $(CFLAGS)
 
 lex: ./parser/yacsh.l ./src/parser/y.tab.h
 	lex -t ./parser/yacsh.l > ./src/parser/lex.yy.c

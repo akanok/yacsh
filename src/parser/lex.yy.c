@@ -734,7 +734,7 @@ case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
 #line 11 "./parser/yacsh.l"
-{return NEWLINE;}
+{return ENDLINE;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
@@ -749,7 +749,7 @@ YY_RULE_SETUP
 case 5:
 YY_RULE_SETUP
 #line 17 "./parser/yacsh.l"
-{yyerror ("unrecognised character");}
+{yyerror("unrecognised character");}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP

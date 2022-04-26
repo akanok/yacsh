@@ -14,7 +14,12 @@ typedef struct Command {
 	char **args;
 } Command;
 
+void printCmd(Command *cmd){
+	for(int i=0; i<cmd->argsNum; i++){
+		printf("Arg %d: %s\n",i,cmd->args[i]);
+	}
 
+}
 
 void execute(char *args[]){
 	pid_t pid;
@@ -26,7 +31,7 @@ void execute(char *args[]){
 	}
 	else if (pid == 0) {
 		execvp(args[0],args);
-		perror("yacsh: Command not found: ");
+		perror("yacsh: Command not found");
 	}
 	else {
 		int returnStatus;

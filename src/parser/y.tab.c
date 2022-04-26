@@ -111,7 +111,7 @@ enum yysymbol_kind_t
   YYSYMBOL_YYerror = 1,                    /* error  */
   YYSYMBOL_YYUNDEF = 2,                    /* "invalid token"  */
   YYSYMBOL_WORD = 3,                       /* WORD  */
-  YYSYMBOL_NEWLINE = 4,                    /* NEWLINE  */
+  YYSYMBOL_ENDLINE = 4,                    /* ENDLINE  */
   YYSYMBOL_NONE = 5,                       /* NONE  */
   YYSYMBOL_YYACCEPT = 6,                   /* $accept  */
   YYSYMBOL_line = 7,                       /* line  */
@@ -520,7 +520,7 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "\"end of file\"", "error", "\"invalid token\"", "WORD", "NEWLINE",
+  "\"end of file\"", "error", "\"invalid token\"", "WORD", "ENDLINE",
   "NONE", "$accept", "line", "args_list", "get_words", "end", YY_NULLPTR
 };
 
@@ -1075,9 +1075,9 @@ yyreduce:
 #line 1076 "./src/parser/y.tab.c"
     break;
 
-  case 8: /* end: NEWLINE  */
+  case 8: /* end: ENDLINE  */
 #line 40 "./parser/yacsh.y"
-             {
+             {  //printCmd(&cmd);
                 if ( Command_builtins(&cmd) == 0 ){
                     execute(cmd.args); 
                 }

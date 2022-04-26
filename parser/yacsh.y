@@ -13,7 +13,7 @@
 %start line
 %union {char *word;}
 %token <word> WORD
-%token NEWLINE NONE
+%token ENDLINE NONE
 
 
 %%
@@ -37,7 +37,7 @@ get_words: WORD {   //printf("Word: %s\n",$1);
        ;
 
 
-end: NEWLINE {
+end: ENDLINE {  //printCmd(&cmd);
                 if ( Command_builtins(&cmd) == 0 ){
                     execute(cmd.args); 
                 }

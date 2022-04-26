@@ -55,7 +55,7 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     WORD = 258,                    /* WORD  */
-    NEWLINE = 259,                 /* NEWLINE  */
+    ENDLINE = 259,                 /* ENDLINE  */
     NONE = 260                     /* NONE  */
   };
   typedef enum yytokentype yytoken_kind_t;
@@ -66,7 +66,7 @@ extern int yydebug;
 #define YYerror 256
 #define YYUNDEF 257
 #define WORD 258
-#define NEWLINE 259
+#define ENDLINE 259
 #define NONE 260
 
 /* Value type.  */

@@ -8,13 +8,13 @@
 %%
 [ \t]                           {}
 
-[ \t]*\n                        {return NEWLINE;}
+[ \t]*\n                        {return ENDLINE;}
 
 [-a-zA-Z0-9_\/\.=:@?$`]+        {yylval.word = yytext; return WORD;}
 
 ('.*'|\".*\")                   {yylval.word = yytext; return WORD;}
 
-.                               {yyerror ("unrecognised character");}
+.                               {yyerror("unrecognised character");}
 %%
 
 
