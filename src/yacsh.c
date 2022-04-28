@@ -7,6 +7,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <errno.h>
+#include <signal.h>
 #include "./parser/y.tab.h"
 
 extern int yy_scan_string(char * str);
@@ -28,7 +29,7 @@ const char* const HISTORY_FILE_NAME = "/.yacsh_history";
 char* history_path;
 
 
-char *prompt_colorizer(char *path){
+char* prompt_colorizer(char *path){
 	const char* close = "\e[0m";
 	int len = 2*strlen(SHELL_PROMPT_COLOR) + strlen(SHELL_PROMPT) + strlen(PATH_COLOR) + strlen(path) + 3*strlen(close) + strlen(SHELL_PROMPT_SEPARATOR);
 	char *prompt = malloc(len*sizeof(char));
@@ -44,7 +45,7 @@ char *prompt_colorizer(char *path){
 	return prompt;
 }
 
-char *prompt(){
+char* prompt(){
 	char cwd[PATH_MAX];
 	char *cdir = basename( getcwd(cwd, sizeof(cwd)) );
 	char *colorized_path = prompt_colorizer(cdir);
@@ -65,8 +66,38 @@ void save_history(char* line){
 	}
 }
 
+char* pre_parse(char* line){
+	char *tilde_expanded = tilde_expand(line);
+
+	char *input = (char *) malloc(strlen(tilde_expanded) + 2);
+	strcpy(input,tilde_expanded);
+	strncat(input,"\n",3);
+	
+	return input;
+}
+
+void regenerate_prompt(){
+	printf("\n"); // Move to a new line
+    rl_on_new_line(); // Regenerate the prompt on a newline
+    rl_replace_line("", 0); // Clear the previous text
+    rl_redisplay();	
+}
+
+void sigint_handler(){
+	regenerate_prompt();
+}
+
+void sigtstp_handler(){
+	printf("Ctrl-Z recived\n");
+	regenerate_prompt();
+}
+
 
 int main (void) {
+	signal(SIGINT,sigint_handler);
+	signal(SIGTSTP,sigtstp_handler);
+	//signal(SIGSTOP,sigtstp_handler);
+
 	char *home = getenv("HOME");
 
 	history_path = calloc(1, (strlen(home)+strlen(HISTORY_FILE_NAME)+1) * sizeof(char) );
@@ -82,9 +113,7 @@ int main (void) {
 		free(prompt_line);
 
 		if( strlen(line) > 0 ){
-			char *input = (char *) malloc(strlen(line) + 2);
-			strcpy(input,line);
-			strncat(input,"\n",3);
+			char *input = pre_parse(line);
 
 			yy_scan_string(input);
 			yyparse();
@@ -95,7 +124,6 @@ int main (void) {
 			free(input);
 		}
 		free(line);
-		
 	}
 
 	return 0;

@@ -10,7 +10,7 @@
 
 [ \t]*\n                        {return ENDLINE;}
 
-[-a-zA-Z0-9_\/\.=:@?$`]+        {yylval.word = yytext; return WORD;}
+[-a-zA-Z0-9_\/\.=:@?$`~]+        {yylval.word = yytext; return WORD;}
 
 ('.*'|\".*\")                   {yylval.word = yytext; return WORD;}
 

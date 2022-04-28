@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <signal.h>
 
 
 typedef struct Command {
@@ -21,6 +22,11 @@ void printCmd(Command *cmd){
 
 }
 
+
+void tstp_handler(){
+
+}
+
 void execute(char *args[]){
 	pid_t pid;
 	pid = fork();
@@ -30,6 +36,9 @@ void execute(char *args[]){
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0) {
+		signal(SIGINT,SIG_DFL);
+		signal(SIGTSTP ,SIG_DFL);
+		setpgid(pid,getgid());
 		execvp(args[0],args);
 		perror("yacsh: Command not found");
 	}

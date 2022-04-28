@@ -5,12 +5,15 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <unistd.h>
+#include <signal.h>
 #include "./yacsh.h"
 
 
 static char lastdir[PATH_MAX];
 
 extern char **environ;
+
 
 int cd(Command *cmd){
     char curdir[PATH_MAX];
@@ -51,13 +54,18 @@ int cd(Command *cmd){
     return 0;
 }
 
-
 void set(/*Command *cmd*/){
   char **s = environ;
 
   for (; *s; s++) {
     printf("%s\n", *s);
   }
+}
+
+void fg(void){
+  printf("Sorry not yer implemented :-(\n");
+  int pid = tcgetpgrp(STDIN_FILENO);
+  kill(pid,SIGCONT);
 }
 
 
@@ -74,7 +82,10 @@ int Command_builtins(Command *cmd){
 	} else if ( !strncmp(command, "set", 4) ){
 		set(cmd);
 		return 1;
-	} else if ( !strncmp(command, "unset", 6) ){
+  } else if ( !strncmp(command, "fg", 3) ){
+    fg();
+    return 1;
+  } else if ( !strncmp(command, "unset", 6) ){
 		//unset(cmd); //putenv()
 		return 1;
 	}
