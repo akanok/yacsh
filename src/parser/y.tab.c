@@ -1082,13 +1082,12 @@ yyreduce:
                     execute(cmd.args); 
                 }
                 Command_free(&cmd);
-                return 1;
             }
-#line 1088 "./src/parser/y.tab.c"
+#line 1087 "./src/parser/y.tab.c"
     break;
 
 
-#line 1092 "./src/parser/y.tab.c"
+#line 1091 "./src/parser/y.tab.c"
 
       default: break;
     }
@@ -1281,7 +1280,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 49 "./parser/yacsh.y"
+#line 48 "./parser/yacsh.y"
 
 
 

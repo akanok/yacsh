@@ -42,7 +42,6 @@ end: ENDLINE {  //printCmd(&cmd);
                     execute(cmd.args); 
                 }
                 Command_free(&cmd);
-                return 1;
             }
    ;
 
