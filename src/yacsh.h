@@ -37,8 +37,10 @@ void execute(char *args[]){
 	}
 	else if (pid == 0) {
 		signal(SIGINT,SIG_DFL);
-		signal(SIGTSTP ,SIG_DFL);
+		//signal(SIGTSTP ,SIG_DFL);
+
 		setpgid(pid,getgid());
+
 		execvp(args[0],args);
 		perror("yacsh: Command not found");
 	}

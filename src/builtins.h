@@ -64,8 +64,8 @@ void set(/*Command *cmd*/){
 
 void fg(void){
   printf("Sorry not yer implemented :-(\n");
-  int pid = tcgetpgrp(STDIN_FILENO);
-  kill(pid,SIGCONT);
+  //int pid = tcgetpgrp(STDIN_FILENO);
+  //kill(pid,SIGCONT);
 }
 
 

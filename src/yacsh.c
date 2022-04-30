@@ -76,27 +76,17 @@ char* pre_parse(char* line){
 	return input;
 }
 
-void regenerate_prompt(){
+void sigint_handler(){
 	printf("\n"); // Move to a new line
     rl_on_new_line(); // Regenerate the prompt on a newline
     rl_replace_line("", 0); // Clear the previous text
     rl_redisplay();	
 }
 
-void sigint_handler(){
-	regenerate_prompt();
-}
-
-void sigtstp_handler(){
-	printf("Ctrl-Z recived\n");
-	regenerate_prompt();
-}
-
 
 int main (void) {
 	signal(SIGINT,sigint_handler);
-	signal(SIGTSTP,sigtstp_handler);
-	//signal(SIGSTOP,sigtstp_handler);
+	signal(SIGTSTP,SIG_IGN);
 
 	char *home = getenv("HOME");
 
