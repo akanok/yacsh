@@ -1,8 +1,7 @@
 
 CFLAGS = -Wall -Wextra
 
-compile_and_run: yacsh
-	./bin/yacsh
+compile: yacsh
 
 run:
 	./bin/yacsh
